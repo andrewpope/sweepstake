@@ -54,7 +54,7 @@ export default function NewSweepstakeForm() {
           className="mt-2 block w-full rounded-[2px] border border-border bg-surface px-3 py-2 font-mono text-sm text-foreground focus:border-accent focus:outline-none"
         />
         <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-subtle-foreground">
-          No new entries after this. Defaults to first kick-off.
+          No new entries after this. Default = first kick-off (11 Jun 2026, 17:00 UK).
         </p>
         {state.fieldErrors?.registrationClosesAt && (
           <p className="mt-2 font-mono text-[11px] uppercase tracking-wider text-destructive">
