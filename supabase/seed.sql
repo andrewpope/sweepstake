@@ -1,0 +1,3 @@
+-- Seed data goes here. Populated in P4.1 (48 World Cup 2026 teams) and
+-- P6.1 (104-fixture skeleton). Left empty for now so `supabase db reset`
+-- doesn't fail when the file is missing.
