@@ -4,9 +4,9 @@ import { useActionState } from 'react'
 import { Button } from '@/components/ui/button'
 import { createSweepstakeAction, type CreateSweepstakeState } from '@/lib/sweepstakes/actions'
 
-// First Sunday before the first kick-off (11 June 2026), 17:00 UK = 16:00 UTC.
-// We render as a datetime-local input which expects YYYY-MM-DDTHH:mm.
-const DEFAULT_CLOSES_AT = '2026-06-11T17:00'
+// 11 June 2026 18:00 Amsterdam = first kick-off. The form value is a
+// wall-clock string interpreted server-side as Europe/Amsterdam local time.
+const DEFAULT_CLOSES_AT = '2026-06-11T18:00'
 
 const initialState: CreateSweepstakeState = {}
 
@@ -43,7 +43,7 @@ export default function NewSweepstakeForm() {
           htmlFor="registrationClosesAt"
           className="block font-mono text-[11px] uppercase tracking-widest text-muted-foreground"
         >
-          Registration closes
+          Registration closes (Amsterdam time)
         </label>
         <input
           id="registrationClosesAt"
@@ -54,7 +54,7 @@ export default function NewSweepstakeForm() {
           className="mt-2 block w-full rounded-[2px] border border-border bg-surface px-3 py-2 font-mono text-sm text-foreground focus:border-accent focus:outline-none"
         />
         <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-subtle-foreground">
-          No new entries after this. Default = first kick-off (11 Jun 2026, 17:00 UK).
+          No new entries after this. Default = first kick-off (11 Jun 2026, 18:00 Amsterdam).
         </p>
         {state.fieldErrors?.registrationClosesAt && (
           <p className="mt-2 font-mono text-[11px] uppercase tracking-wider text-destructive">

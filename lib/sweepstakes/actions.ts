@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { getCurrentUser } from '@/lib/auth/get-current-user'
 import { getServerClient } from '@/lib/supabase/server'
+import { amsterdamWallClockToDate } from '@/lib/time'
 
 const createSchema = z.object({
   name: z
@@ -51,7 +52,8 @@ export async function createSweepstakeAction(
     .insert({
       name: parsed.data.name,
       organiser_id: user.id,
-      registration_closes_at: new Date(parsed.data.registrationClosesAt).toISOString(),
+      // Form value is wall-clock Amsterdam time (datetime-local).
+      registration_closes_at: amsterdamWallClockToDate(parsed.data.registrationClosesAt).toISOString(),
     })
     .select('id')
     .single()

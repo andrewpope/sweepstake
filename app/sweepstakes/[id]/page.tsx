@@ -3,6 +3,7 @@ import { Card, CardDescription, CardTitle } from '@/components/ui/card'
 import { StatusChip } from '@/components/ui/status-chip'
 import { getCurrentUser } from '@/lib/auth/get-current-user'
 import { getPoolForCurrentUser } from '@/lib/sweepstakes/queries'
+import { formatInAmsterdam } from '@/lib/time'
 
 type Params = Promise<{ id: string }>
 
@@ -22,13 +23,7 @@ export default async function PoolDashboardPage({ params }: { params: Params }) 
     currency: 'EUR',
   })
   const closesAt = pool.registrationClosesAt
-    ? new Date(pool.registrationClosesAt).toLocaleString('en-GB', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-      })
+    ? `${formatInAmsterdam(pool.registrationClosesAt)} CET/CEST`
     : 'not set'
 
   return (
