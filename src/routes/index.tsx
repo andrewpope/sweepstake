@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute, useRouteContext } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardTitle } from '@/components/ui/card'
 import { StatusChip } from '@/components/ui/status-chip'
@@ -6,6 +6,8 @@ import { StatusChip } from '@/components/ui/status-chip'
 export const Route = createFileRoute('/')({ component: Home })
 
 function Home() {
+  const { user } = useRouteContext({ from: '__root__' })
+
   return (
     <main className="page-wrap py-12">
       <p className="font-mono text-[11px] tracking-widest uppercase text-muted-foreground">
@@ -22,8 +24,20 @@ function Home() {
       </p>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <Button data-testid="cta-primary">Sign in with Slack</Button>
-        <Button variant="secondary">How it works</Button>
+        {user ? (
+          <>
+            <Button data-testid="cta-primary" disabled>
+              Create a sweepstake — coming in P2
+            </Button>
+            <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground self-center">
+              Signed in as {user.name}
+            </span>
+          </>
+        ) : (
+          <Link to="/login">
+            <Button data-testid="cta-primary">Sign in with Slack</Button>
+          </Link>
+        )}
       </div>
 
       <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -61,7 +75,7 @@ function Home() {
               <CardTitle>Argentina</CardTitle>
               <CardDescription>Group A</CardDescription>
             </div>
-            <StatusChip tone="info">Live · 67'</StatusChip>
+            <StatusChip tone="info">Live · 67&apos;</StatusChip>
           </div>
           <p className="mt-4 font-mono text-2xl tabular-nums text-foreground">1 — 1</p>
           <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">

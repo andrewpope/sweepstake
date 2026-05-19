@@ -3,10 +3,15 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import { getCurrentUser } from '@/server/fns/auth'
 
 import appCss from '../styles.css?url'
 
 export const Route = createRootRoute({
+  beforeLoad: async () => {
+    const user = await getCurrentUser()
+    return { user }
+  },
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
