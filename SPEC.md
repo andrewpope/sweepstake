@@ -25,7 +25,7 @@ A web app for running private World Cup 2026 sweepstakes. One organiser creates 
 # Install
 pnpm install
 
-# Local dev (TanStack Start on Vite, port 3000)
+# Local dev (TanStack Start on Vite, port 3737)
 pnpm dev
 
 # Production build & run
