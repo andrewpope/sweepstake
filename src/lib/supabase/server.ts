@@ -1,5 +1,5 @@
 import { createServerClient, parseCookieHeader, serializeCookieHeader } from '@supabase/ssr'
-import { getRequestHeader, setResponseHeader } from '@tanstack/react-start/server'
+import { getRequestHeader, getResponseHeaders } from '@tanstack/react-start/server'
 import WebSocket from 'ws'
 import type { Database } from './types'
 import { supabaseAnonKey, supabaseUrl } from './env'
@@ -14,9 +14,11 @@ if (typeof globalThis.WebSocket === 'undefined') {
 /**
  * Supabase client for server functions and route loaders.
  *
- * Wires `@supabase/ssr` to TanStack Start's request/response primitives so the
- * auth session cookie travels round-trip through SSR loaders, server functions
- * and the OAuth callback.
+ * Cookies are written via `getResponseHeaders().append('Set-Cookie', …)` so
+ * multiple Set-Cookie headers accumulate on the response. Both
+ * `setResponseHeader('Set-Cookie', …)` and `setCookie(…)` *replace* the
+ * Set-Cookie header on each call, which silently drops Supabase's chunked
+ * session — only the last `sb-<ref>-auth-token.N` would reach the browser.
  */
 export function getServerClient() {
   return createServerClient<Database>(supabaseUrl(), supabaseAnonKey(), {
@@ -27,8 +29,9 @@ export function getServerClient() {
         return parsed.map((c) => ({ name: c.name, value: c.value ?? '' }))
       },
       setAll(cookiesToSet) {
+        const headers = getResponseHeaders()
         for (const { name, value, options } of cookiesToSet) {
-          setResponseHeader('Set-Cookie', serializeCookieHeader(name, value, options))
+          headers.append('Set-Cookie', serializeCookieHeader(name, value, options))
         }
       },
     },
