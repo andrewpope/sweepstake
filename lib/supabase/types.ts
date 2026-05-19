@@ -104,6 +104,7 @@ export type Database = {
           max_uses: number | null
           sweepstake_id: string
           token: string
+          used_count: number
         }
         Insert: {
           created_at?: string
@@ -112,6 +113,7 @@ export type Database = {
           max_uses?: number | null
           sweepstake_id: string
           token: string
+          used_count?: number
         }
         Update: {
           created_at?: string
@@ -120,6 +122,7 @@ export type Database = {
           max_uses?: number | null
           sweepstake_id?: string
           token?: string
+          used_count?: number
         }
         Relationships: [
           {
@@ -342,7 +345,23 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_invite_by_token: {
+        Args: { p_token: string }
+        Returns: {
+          expires_at: string
+          invite_id: string
+          max_uses: number
+          sweepstake_id: string
+          sweepstake_name: string
+          used_count: number
+        }[]
+      }
+      is_pool_member: { Args: { p_pool_id: string }; Returns: boolean }
+      is_pool_organiser: { Args: { p_pool_id: string }; Returns: boolean }
+      join_pool_via_invite: {
+        Args: { p_display_name: string; p_token: string }
+        Returns: string
+      }
     }
     Enums: {
       match_stage:
