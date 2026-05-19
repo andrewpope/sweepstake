@@ -362,6 +362,10 @@ export type Database = {
         Args: { p_display_name: string; p_token: string }
         Returns: string
       }
+      run_pool_draw: {
+        Args: { p_allocations: Json; p_pool_id: string; p_seed: string }
+        Returns: undefined
+      }
     }
     Enums: {
       match_stage:

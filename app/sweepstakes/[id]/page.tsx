@@ -131,12 +131,20 @@ export default async function PoolDashboardPage({ params }: { params: Params }) 
             <h2 className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
               Invite participants
             </h2>
-            <Link
-              href={`/sweepstakes/${id}/entries`}
-              className="font-mono text-[11px] uppercase tracking-wider text-accent hover:underline"
-            >
-              Manage entries →
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href={`/sweepstakes/${id}/entries`}
+                className="font-mono text-[11px] uppercase tracking-wider text-accent hover:underline"
+              >
+                Manage entries →
+              </Link>
+              <Link
+                href={`/sweepstakes/${id}/draw`}
+                className="font-mono text-[11px] uppercase tracking-wider text-accent hover:underline"
+              >
+                Run draw →
+              </Link>
+            </div>
           </div>
           <div className="mt-3">
             <InviteSection poolId={id} existingTokens={inviteTokens} />
