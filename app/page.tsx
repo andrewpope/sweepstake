@@ -25,9 +25,9 @@ export default async function Home() {
       <div className="mt-8 flex flex-wrap gap-3">
         {user ? (
           <>
-            <Button data-testid="cta-primary" disabled>
-              Create a sweepstake — coming in P2
-            </Button>
+            <Link href="/sweepstakes/new">
+              <Button data-testid="cta-primary">Create a sweepstake</Button>
+            </Link>
             <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground self-center">
               Signed in as {user.name}
             </span>
