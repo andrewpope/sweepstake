@@ -9,7 +9,7 @@ function required(name: string, value: string | undefined): string {
 }
 
 export const supabaseUrl = (): string =>
-  required('VITE_SUPABASE_URL', import.meta.env.VITE_SUPABASE_URL)
+  required('NEXT_PUBLIC_SUPABASE_URL', process.env.NEXT_PUBLIC_SUPABASE_URL)
 
 export const supabaseAnonKey = (): string =>
-  required('VITE_SUPABASE_ANON_KEY', import.meta.env.VITE_SUPABASE_ANON_KEY)
+  required('NEXT_PUBLIC_SUPABASE_ANON_KEY', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)

@@ -1,21 +1,40 @@
+# dependencies
 node_modules
-.DS_Store
-dist
-dist-ssr
-*.local
-.env
-.nitro
-.tanstack
-.wrangler
-.output
-.vinxi
-__unconfig*
-todos.json
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# Test artifacts
+# next.js
+.next
+out
+
+# misc
+.DS_Store
+*.local
+*.tsbuildinfo
+next-env.d.ts
+
+# env files
+.env
+.env.local
+.env.*.local
+
+# vercel
+.vercel
+
+# tests
 coverage
 playwright-report
 test-results
 blob-report
 playwright/.cache
-.vercel
+
+# legacy tanstack-start dirs (kept until graveyard branch is removed)
+.tanstack
+.output
+dist
+dist-ssr

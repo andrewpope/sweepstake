@@ -1,12 +1,11 @@
-import { Link, createFileRoute, useRouteContext } from '@tanstack/react-router'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardTitle } from '@/components/ui/card'
 import { StatusChip } from '@/components/ui/status-chip'
+import { getCurrentUser } from '@/lib/auth/get-current-user'
 
-export const Route = createFileRoute('/')({ component: Home })
-
-function Home() {
-  const { user } = useRouteContext({ from: '__root__' })
+export default async function Home() {
+  const user = await getCurrentUser()
 
   return (
     <main className="page-wrap py-12">
@@ -34,7 +33,7 @@ function Home() {
             </span>
           </>
         ) : (
-          <Link to="/login">
+          <Link href="/login">
             <Button data-testid="cta-primary">Sign in with Slack</Button>
           </Link>
         )}

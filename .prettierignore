@@ -1,8 +1,5 @@
 node_modules
-dist
-dist-ssr
-.output
-.nitro
-.tanstack
+.next
+out
 pnpm-lock.yaml
-src/routeTree.gen.ts
+lib/supabase/types.ts
