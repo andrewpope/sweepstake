@@ -21,8 +21,36 @@ export const Route = createRootRoute({
     ],
     links: [{ rel: 'stylesheet', href: appCss }],
   }),
+  notFoundComponent: NotFoundPage,
   shellComponent: RootDocument,
 })
+
+function NotFoundPage() {
+  const path = typeof window !== 'undefined' ? window.location.href : '(server)'
+  return (
+    <main className="page-wrap py-24">
+      <div className="mx-auto max-w-md">
+        <p className="font-mono text-[11px] uppercase tracking-widest text-destructive">
+          404 — Not Found
+        </p>
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-foreground">
+          No route matches this URL.
+        </h1>
+        <div className="mt-6 rounded-[4px] border border-border bg-surface p-4">
+          <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+            requested URL
+          </p>
+          <p className="mt-1 break-all font-mono text-sm text-foreground">{path}</p>
+        </div>
+        <p className="mt-6 text-sm text-muted-foreground">
+          <a className="text-accent underline" href="/">
+            Back to home →
+          </a>
+        </p>
+      </div>
+    </main>
+  )
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
